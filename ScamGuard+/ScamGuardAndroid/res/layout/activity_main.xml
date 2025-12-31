@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="@color/background">
+
+    <!-- App Logo/Icon -->
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="ScamGuard Logo" />
+
+    <!-- App Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ScamGuard+"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Status Text -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⚠️ ScamGuard+ is INACTIVE"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:padding="16dp"
+        android:background="@drawable/status_background"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Enable Button -->
+    <Button
+        android:id="@+id/enableButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Protection"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:backgroundTint="@color/primary"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Features List -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🛡️ Real-time Protection Features:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="✅ Monitors WhatsApp notifications\n✅ Detects APK file attachments\n✅ Scans for scam keywords\n✅ Identifies suspicious links\n✅ Instant scam alerts\n✅ Works 24/7 in background"
+        android:textSize="14sp"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Scam Count -->
+    <TextView
+        android:id="@+id/scamCountText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scams Blocked Today: 0"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:textColor="@color/accent" />
+
+</LinearLayout>

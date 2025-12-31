@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScamGuard+ | Desktop Assistant</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Desktop specific enhancements */
+        html,
+        body {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #020617;
+            overflow: hidden;
+        }
+
+        .desktop-container {
+            width: 100%;
+            max-width: 450px;
+            height: 90vh;
+            max-height: 800px;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.8), 0 0 20px rgba(99, 102, 241, 0.2);
+            border-radius: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .desktop-container .app-wrapper {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Responsive adjustments for desktop */
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .action-card {
+            padding: 28px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="desktop-container">
+        <div class="app-wrapper">
+            <div class="glow-blur top-right"></div>
+            <div class="glow-blur bottom-left"></div>
+
+            <header>
+                <div class="brand">
+                    <svg class="brand-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    <span data-i18n="app_name">ScamGuard+</span>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <!-- Refresh Button for PWA -->
+                    <button id="btn-refresh-app" class="mini-action-btn" title="Refresh App"
+                        style="width: 32px; height: 32px; border-radius: 50%; padding: 0; justify-content: center;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M23 4v6h-6"></path>
+                            <path d="M1 20v-6h6"></path>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                    </button>
+                    <button id="btn-install-pwa" class="mini-action-btn hidden" title="Install App"
+                        style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); width: auto; padding: 0 12px; height: 32px; border-radius: 16px; border: none; color: white; display: none; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Install
+                    </button>
+                    <button id="btn-speak-global" class="mini-action-btn" title="Listen to Page"
+                        style="width: 32px; height: 32px; border-radius: 50%; padding: 0; justify-content: center;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                        </svg>
+                    </button>
+                    <select id="lang-selector" class="lang-pill" title="Select Language">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी (Hindi)</option>
+                        <option value="bn">বাংলা (Bengali)</option>
+                        <option value="te">తెలుగు (Telugu)</option>
+                        <option value="ta">தமிழ் (Tamil)</option>
+                    </select>
+                    <button class="settings-btn" id="btn-settings" title="Settings">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Home View -->
+            <main id="view-home" class="view active">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div class="status-pill">
+                        <div class="pulse"></div>
+                        <span data-i18n="app_status">AI Protection Active</span>
+                    </div>
+                    <label class="switch" title="Simulate Background Protection">
+                        <input type="checkbox" id="toggle-protection">
+                        <span class="slider round"></span>
+                        <span
+                            style="position: absolute; left: -110px; top: 2px; color: var(--text-muted); font-size: 0.8rem; font-weight: 600;">Live
+                            Monitor</span>
+                    </label>
+                </div>
+                <h1 data-i18n="home_title">Secure Your Financial Future.</h1>
+                <p class="subtitle" data-i18n="home_subtitle">Advanced identity protection and scam prevention powered
+                    by Gemini AI.</p>
+                </p>
+
+                <div class="main-actions">
+                    <div class="action-card primary" id="nav-checker">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
+                        </div>
+                        <div class="card-info">
+                            <h3 data-i18n="nav_checker">Scam Checker</h3>
+                            <p data-i18n="nav_checker_desc">Verify suspicious emails, texts, or images with elite AI.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="action-card danger" id="nav-victim">
+                        <div class="card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                                <line x1="12" y1="9" x2="12" y2="13" />
+                                <line x1="12" y1="17" x2="12.01" y2="17" />
+                            </svg>
+                        </div>
+                        <div class="card-info">
+                            <h3 data-i18n="nav_victim">Victim Support</h3>
+                            <p data-i18n="nav_victim_desc">Deceived or lost money? Get immediate help & official police
+                                reports.</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    style="margin-top: auto; padding: 20px; text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+                    <span data-i18n="app_version">ScamGuard+ v1.1.8</span> 💻 [Stable v1]
+                </div>
+
+                <!-- Hidden Simulation Controls (Visible only when Monitor is ON) -->
+                <div id="simulation-controls" class="hidden"
+                    style="position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); border: 1px solid #334155; padding: 10px; border-radius: 12px; gap: 8px; flex-direction: column; width: 90%; backdrop-filter: blur(8px);">
+                    <p style="font-size: 0.75rem; color: #94a3b8; margin: 0; text-align: center;">Wait for detection...
+                        or Simulate:</p>
+                    <div style="display: flex; gap: 8px; justify-content: center;">
+                        <button onclick="BackgroundSimulator.simulateIncoming('Hey, are you free for dinner tonight?')"
+                            style="background: #10b981; color: white; border: none; padding: 8px; border-radius: 6px; font-size: 0.7rem; flex: 1;">Safe
+                            MSG</button>
+                        <button
+                            onclick="BackgroundSimulator.simulateIncoming('Urgent! Your account is blocked. Update KYC via this app: sbi_kyc_update.apk')"
+                            style="background: #ef4444; color: white; border: none; padding: 8px; border-radius: 6px; font-size: 0.7rem; flex: 1;">APK
+                            Scam</button>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Checker View -->
+            <section id="view-checker" class="view">
+                <div class="view-header">
+                    <button class="back-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12" />
+                            <polyline points="12 19 5 12 12 5" />
+                        </svg></button>
+                    <h2 data-i18n="checker_title">Scam Detector</h2>
+                </div>
+                <div class="checker-content">
+                    <p class="subtitle" style="margin-bottom: 12px;" data-i18n="checker_instr">Paste text or upload a
+                        screenshot for visual AI scanning.</p>
+
+                    <div class="input-container">
+                        <textarea id="checker-input" data-i18n-placeholder="checker_placeholder"
+                            placeholder="e.g. 'You have won a lottery of $1M...'"></textarea>
+
+                        <div class="image-upload-zone" id="image-drop-zone">
+                            <input type="file" id="image-input" accept="image/*" hidden>
+                            <div class="upload-content" id="upload-idle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                    <circle cx="8.5" cy="8.5" r="1.5" />
+                                    <polyline points="21 15 16 10 5 21" />
+                                </svg>
+                                <span data-i18n="upload_text">Scan Screenshot</span>
+                            </div>
+                            <div class="upload-preview hidden" id="upload-preview-container">
+                                <img src="" id="image-preview">
+                                <button class="remove-img" id="btn-remove-img">×</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="analyze-btn" id="btn-analyze">
+                        <span id="btn-text" data-i18n="btn_analyze">Analyze with Gemini</span>
+                        <div id="btn-loader" class="loader hidden"></div>
+                    </button>
+
+                    <div id="checker-result" class="hidden">
+                        <!-- Results populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Victim Support View -->
+            <section id="view-victim" class="view">
+                <div class="view-header">
+                    <button class="back-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12" />
+                            <polyline points="12 19 5 12 12 5" />
+                        </svg></button>
+                    <h2 data-i18n="victim_title">Emergency Recovery</h2>
+                </div>
+
+                <div id="step-1" class="wizard-step active">
+                    <div class="voice-command-zone" style="text-align: center; margin-bottom: 20px;">
+                        <button id="btn-start-record" class="record-btn"
+                            style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                <line x1="12" y1="19" x2="12" y2="23"></line>
+                                <line x1="8" y1="23" x2="16" y2="23"></line>
+                            </svg>
+                        </button>
+                        <p style="margin-top: 8px; font-size: 0.8rem; color: var(--text-muted);" id="record-status"
+                            data-i18n="tap_to_speak">Tap to Speak Incident</p>
+                    </div>
+
+                    <div class="select-group">
+                        <label data-i18n="victim_name">Your Name</label>
+                        <input type="text" id="victim-name" data-i18n-placeholder="name_ph"
+                            placeholder="Enter your full name">
+                    </div>
+                    <div class="select-group">
+                        <label data-i18n="victim_number">Your Mobile Number</label>
+                        <input type="text" id="victim-number" data-i18n-placeholder="number_ph"
+                            placeholder="e.g. 9876543210">
+                    </div>
+
+                    <div class="select-group">
+                        <label data-i18n="victim_q1">How were you defrauded?</label>
+                        <select id="victim-method">
+                            <option value="upi" data-i18n="q1_v1">UPI / Instant Transfer</option>
+                            <option value="card" data-i18n="q1_v2">Credit / Debit Card</option>
+                            <option value="bank" data-i18n="q1_v3">Direct Bank Transfer</option>
+                            <option value="crypto" data-i18n="q1_v4">Cryptocurrency</option>
+                            <option value="gift" data-i18n="q1_v5">Gift Cards / Vouchers</option>
+                        </select>
+                    </div>
+                    <div class="select-group">
+                        <label data-i18n="victim_q2">When did it happen?</label>
+                        <select id="victim-time">
+                            <option value="now" data-i18n="q2_v1">Less than 30 mins ago (Golden Hour)</option>
+                            <option value="today" data-i18n="q2_v2">Sometime today</option>
+                            <option value="old" data-i18n="q2_v3">More than 24 hours ago</option>
+                        </select>
+                    </div>
+                    <div class="select-group">
+                        <label data-i18n="victim_q3">Amount Lost (Approximate)</label>
+                        <input type="text" id="victim-amount" data-i18n-placeholder="q3_ph"
+                            placeholder="e.g. ₹25,000 or $500">
+                    </div>
+                    <div class="select-group">
+                        <label data-i18n="victim_q4">Suspect's Contact/Account Detail</label>
+                        <input type="text" id="victim-suspect" data-i18n-placeholder="q4_ph"
+                            placeholder="Phone number, UPI ID, or Website link">
+                    </div>
+                    <div class="select-group">
+                        <label data-i18n="victim_q5">Briefly describe how it happened</label>
+                        <textarea id="victim-desc" data-i18n-placeholder="q5_ph"
+                            placeholder="e.g. Received a call about KYC update, shared OTP..."
+                            style="height: 80px;"></textarea>
+                    </div>
+                    <button class="analyze-btn" id="btn-victim-next" data-i18n="victim_btn">Generate Full Complaint &
+                        Plan</button>
+                    <p style="text-align: center; font-size: 0.8rem; color: var(--danger); font-weight: 600;">Time is of
+                        the essence. Act quickly!</p>
+                </div>
+
+                <div id="step-2" class="wizard-step">
+                    <div id="report-hub" class="report-list">
+                        <!-- Action items populated by JS -->
+                    </div>
+                    <button class="copy-btn" style="width:100%; justify-content:center; margin-top:16px;"
+                        id="btn-victim-reset">
+                        Start Another Incident
+                    </button>
+                </div>
+            </section>
+
+            <!-- Settings View -->
+            <section id="view-settings" class="view">
+                <div class="view-header">
+                    <button class="back-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12" />
+                            <polyline points="12 19 5 12 12 5" />
+                        </svg></button>
+                    <h2 data-i18n="settings_title">Settings</h2>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 24px;">
+                    <div class="select-group">
+                        <p class="subtitle" style="font-size: 0.9rem; margin-top: 8px;" data-i18n="api_hint_local">
+                            Offline AI Protection Active. No API Key required.</p>
+                    </div>
+                    <button class="analyze-btn" id="btn-save-settings" data-i18n="save_btn">Go To Home</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

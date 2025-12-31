@@ -1,0 +1,45 @@
+{
+  "name": "ScamGuard+ - Real-Time Scam Detection",
+  "short_name": "ScamGuard+",
+  "description": "AI-powered scam detection and prevention app. Paste WhatsApp messages to check for scams instantly.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "categories": [
+    "security",
+    "utilities",
+    "finance"
+  ],
+  "icons": [
+    {
+      "src": "icon16.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon16.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Check Message",
+      "short_name": "Check",
+      "description": "Quickly check a suspicious message",
+      "url": "./index.html#checker",
+      "icons": [
+        {
+          "src": "icon16.jpg",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
